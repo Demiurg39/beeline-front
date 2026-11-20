@@ -9,35 +9,37 @@ class UICharts:
         tariffs = list(data.keys())
         costs = list(data.values())
 
-        # Создаем список цветов для каждого столбца вручную, без сложных условий
+        # Цвета: фиолетовый для рекомендуемого, светло-фиолетовый для остальных
         colors = []
         for name in tariffs:
             if name == recommended_name:
-                colors.append('#7452D6')  # Темно-фиолетовый для рекомендуемого
+                colors.append('#6C38FF')  # Новый Primary
             else:
-                colors.append('#D1C4F5')  # Светло-фиолетовый для остальных
+                colors.append('#D1C4F5')
 
         fig = go.Figure(data=[go.Bar(
             x=tariffs,
             y=costs,
             marker_color=colors,
-            text=[f"{c:.0f}" for c in costs],
-            textposition='auto'
+            text=[f"{c:.0f} сом" for c in costs],
+            textposition='auto',
+            hovertemplate="<b>%{x}</b><br>Стоимость: %{y:.0f} сом/мес<extra></extra>"
         )])
 
         fig.update_layout(
             plot_bgcolor="rgba(0,0,0,0)",
             paper_bgcolor="rgba(0,0,0,0)",
             margin=dict(l=20, r=20, t=40, b=20),
-            yaxis=dict(showgrid=False, showticklabels=False, zeroline=False),
-            xaxis=dict(showgrid=False, tickfont=dict(color="#6E688F", size=14)),
+            yaxis=dict(showgrid=True, gridcolor='#F0F0F0', title="Стоимость за месяц (сом)"),
+            xaxis=dict(showgrid=False, title="Название тарифа"),
             showlegend=False,
-            height=350
+            height=350,
+            bargap=0.4
         )
 
-        # Делаем текст белым и скругляем углы
+        # Белый текст для всех столбцов
         fig.update_traces(
-            textfont=dict(color='#FFFFFF'),
+            textfont=dict(color='#FFFFFF', size=12),
             marker_cornerradius=8
         )
 

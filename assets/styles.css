@@ -1,22 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap');
 
-/* Скрываем стандартные элементы Streamlit */
 #MainMenu {visibility: hidden;}
 header[data-testid="stHeader"] {visibility: hidden;}
 [data-testid="stSidebar"] {display: none;}
 footer {visibility: hidden;}
 [data-testid="stSidebarNav"] {display: none;}
 
-/* Общие настройки страницы */
 html, body, [class*="css"] {
-    font-family: 'Manrope', sans-serif !important;
+    font-family: 'DM Sans', sans-serif !important;
+    color: #0F172A !important;
 }
+
+/* ВОЗВРАЩАЕМ КРАСИВЫЙ ГРАДИЕНТ, КАК БЫЛО РАНЬШЕ */
 .stApp {
-    background: linear-gradient(135deg, #F7F5FF 0%, #ECE6FF 100%);
+    background: linear-gradient(135deg, #FAFAFF 0%, #EDE9FF 100%) !important;
 }
+
+/* ЖЕСТКАЯ ЦЕНТРОВКА И УБИРАЕМ ОГРОМНЫЙ ОТСТУП СВЕРХУ */
 .block-container {
-    max-width: 1200px !important;
-    padding: 24px 32px !important;
+    max-width: 1140px !important;
+    padding-top: 2rem !important;    /* Уменьшили отступ сверху */
+    padding-bottom: 4rem !important; /* Добавили отступ снизу */
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    margin: 0 auto !important;
 }
 
 /* Кнопки */
@@ -24,29 +31,38 @@ html, body, [class*="css"] {
     border-radius: 12px !important;
     height: 48px !important;
     font-weight: 700 !important;
-    font-family: 'Manrope', sans-serif !important;
+    font-family: 'DM Sans', sans-serif !important;
     border: none !important;
     transition: all 0.2s ease;
 }
 .stButton > button[kind="primary"] {
-    background-color: #5B3FD0 !important;
+    background-color: #6C38FF !important;
     color: white !important;
-    box-shadow: 0 4px 12px rgba(91, 63, 208, 0.2) !important;
+    box-shadow: 0 4px 12px rgba(108, 56, 255, 0.2) !important;
 }
 .stButton > button[kind="primary"]:hover {
-    background-color: #7452D6 !important;
+    background-color: #4A20C8 !important;
     transform: translateY(-1px);
 }
 .stButton > button[kind="secondary"] {
     background-color: white !important;
-    color: #5B3FD0 !important;
-    border: 1.5px solid #5B3FD0 !important;
+    color: #6C38FF !important;
+    border: 1.5px solid #E5E7EB !important;
+}
+/* Эффект поднятия карточки при наведении */
+.tariff-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 12px 20px rgba(116, 82, 214, 0.15) !important;
+    border-color: #A78BFA !important; /* Легкая подсветка рамки */
 }
 
-/* Стили для file_uploader */
-[data-testid="stFileUploaderDropzone"] {
-    background-color: rgba(255, 255, 255, 0.6) !important;
-    border: 1.5px dashed #7452D6 !important;
-    border-radius: 20px !important;
-    padding: 40px !important;
+/* Эффект нажатия на кнопку Streamlit (Подробнее, Подключить) */
+div.stButton > button:active {
+    transform: scale(0.96) !important;
+    transition: transform 0.1s ease !important;
+}
+
+/* Плавная анимация для кнопок при наведении */
+div.stButton > button {
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
 }

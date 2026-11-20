@@ -7,15 +7,15 @@ st.set_page_config(page_title="Вход — Tariffly", layout="wide")
 inject_css()
 render_header("home")
 
-# Делаем две колонки: слева текст и ввод, справа картинка
-col_left, col_right = st.columns([1, 1], gap="large")
+# Делаем колонки 1 к 1.1, чтобы правая (с картинкой) была чуть шире
+col_left, col_right = st.columns([1, 1.1], gap="large")
 
 with col_left:
     st.markdown(
-        '<h2 style="color: #252044; font-weight: 800; margin-top: 50px;">Узнайте, сколько вы можете сэкономить</h2>',
+        '<h2 style="color: #0F172A; font-weight: 800; margin-top: 30px;">Узнайте, сколько вы можете сэкономить</h2>',
         unsafe_allow_html=True)
     st.markdown(
-        '<p style="color: #6E688F; font-size: 1.1rem; margin-bottom: 40px;">Введите ваш номер телефона. Мы сами запросим детализацию из базы оператора.</p>',
+        '<p style="color: #64748B; font-size: 1.1rem; margin-bottom: 40px;">Введите ваш номер телефона. Мы сами запросим детализацию из базы оператора.</p>',
         unsafe_allow_html=True)
 
     # Поле ввода
@@ -34,15 +34,13 @@ with col_left:
                 st.write("🧠 Нейросеть подбирает лучший вариант...")
                 status.update(label="Анализ завершен!", state="complete", expanded=False)
 
-            # Сохраняем ТОЛЬКО номер телефона.
-            # Сами данные мы запросим на странице Результатов через backend_mock.
             st.session_state['phone'] = phone
             st.switch_page("pages/2_Результаты.py")
 
     st.markdown(
-        '<div style="color: #6E688F; font-size: 0.8rem; margin-top: 20px;">🔒 Мы не сохраняем ваши данные. Это демо-версия для хакатона.</div>',
+        '<div style="color: #64748B; font-size: 0.8rem; margin-top: 20px;">🔒 Мы не сохраняем ваши данные. Это демо-версия для хакатона.</div>',
         unsafe_allow_html=True)
 
 with col_right:
-    # Картинка базы данных
+    # Возвращаем st.image и растягиваем на всю колонку
     st.image("assets/db_phone.png", use_container_width=True)

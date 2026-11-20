@@ -13,12 +13,31 @@ st.markdown('<p style="color: #6E688F; font-size: 1rem; margin-bottom: 24px;">С
 
 tariffs, error = DataService.load_mock_tariffs()
 
+@st.dialog("Детали тарифа")
+def show_tariff_modal(tariff, is_rec):
+    st.markdown(f"### {tariff.name}")
+    st.markdown(f"**Цена:** {tariff.price} сом / мес.")
+    if is_rec:
+        st.success("Этот тариф рекомендован специально для вас!")
+    st.markdown("---")
+    st.markdown(f"**Интернет:** {tariff.gb} ГБ")
+    st.markdown(f"**Звонки:** {tariff.minutes} минут")
+    st.markdown(f"**SMS:** {tariff.sms} шт.")
+    st.markdown(f"**Перерасход:** {tariff.overage_cost}")
+    st.write("")
+    if st.button("Подключить этот тариф", use_container_width=True, type="primary"):
+        st.success(f"Заявка на подключение тарифа «{tariff.name}» отправлена!")
+
 if error:
     st.error(f"Ошибка: {error}")
 else:
     cols = st.columns(4, gap="medium")
     for idx, tariff in enumerate(tariffs):
         with cols[idx]:
-            # Временно хардкодим, что Комфорт+ рекомендуемый (потом будем брать из результата)
             is_rec = (tariff.name == "Комфорт+")
             UICards.render_tariff_plan_card(tariff, is_recommended=is_rec)
+            st.write("")
+            btn_type = "primary" if is_rec else "secondary"
+            # Используем idx для уникальности ключа
+            if st.button("Подробнее", key=f"btn_{idx}", use_container_width=True, type=btn_type):
+                show_tariff_modal(tariff, is_rec)

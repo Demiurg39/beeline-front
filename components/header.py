@@ -1,29 +1,10 @@
 import streamlit as st
 
-
 def render_header(active_page="home"):
-    home_color = "#7452D6" if active_page == "home" else "#252044"
-    tariffs_color = "#7452D6" if active_page == "tariffs" else "#252044"
-    about_color = "#7452D6" if active_page == "about" else "#252044"
+    home_color = "#6C38FF" if active_page == "home" else "#64748B"
+    tariffs_color = "#6C38FF" if active_page == "tariffs" else "#64748B"
+    about_color = "#6C38FF" if active_page == "about" else "#64748B"
 
-    col1, col2, col3 = st.columns([2, 3, 1])
+    html = f'<div style="background: white; padding: 12px 24px; border-bottom: 1px solid #E5E7EB; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-radius: 0 0 12px 12px;"><div style="display: flex; align-items: center; gap: 10px;"><div style="display: flex; gap: 3px; align-items: flex-end; height: 20px;"><div style="width: 6px; height: 10px; background: #6C38FF; border-radius: 2px;"></div><div style="width: 6px; height: 15px; background: #8B5CF6; border-radius: 2px;"></div><div style="width: 6px; height: 20px; background: #4A20C8; border-radius: 2px;"></div></div><span style="font-size: 20px; font-weight: 800; color: #0F172A;">Tariffly</span></div><div style="display: flex; gap: 24px; font-size: 14px; font-weight: 500;"><a href="/" target="_self" style="color: {home_color}; text-decoration: none;">Главная</a><a href="Тарифы" target="_self" style="color: {tariffs_color}; text-decoration: none;">Тарифы</a><a href="О_сервисе" target="_self" style="color: {about_color}; text-decoration: none;">О сервисе</a></div></div>'
 
-    with col1:
-        st.markdown(
-            '<div style="display: flex; align-items: center; gap: 10px;"><div style="display: flex; gap: 3px; align-items: flex-end; height: 24px;"><div style="width: 8px; height: 12px; background: #C9B8F5; border-radius: 2px;"></div><div style="width: 8px; height: 18px; background: #8C6CF0; border-radius: 2px;"></div><div style="width: 8px; height: 24px; background: #5B3FD0; border-radius: 2px;"></div></div><span style="font-size: 24px; font-weight: 800; color: #252044;">Tariffly</span></div>',
-            unsafe_allow_html=True)
-
-    with col2:
-        # Используем st.page_link для надежности
-        c1, c2, c3 = st.columns(3)
-        with c1:
-            st.page_link("app.py", label="Главная", icon=None)
-        with c2:
-            st.page_link("pages/3_Тарифы.py", label="Все тарифы", icon=None)
-        with c3:
-            st.page_link("pages/4_О_сервисе.py", label="О сервисе", icon=None)
-
-    with col3:
-        st.markdown(
-            '<div style="text-align: right;"><button style="background: white; border: none; border-radius: 50%; width: 40px; height: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer; color: #7452D6; font-size: 18px;">🌙</button></div>',
-            unsafe_allow_html=True)
+    st.markdown(html, unsafe_allow_html=True)
