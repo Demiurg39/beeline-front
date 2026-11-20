@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap');
+
+/* Скрываем стандартные элементы Streamlit */
+#MainMenu {visibility: hidden;}
+header[data-testid="stHeader"] {visibility: hidden;}
+[data-testid="stSidebar"] {display: none;}
+footer {visibility: hidden;}
+[data-testid="stSidebarNav"] {display: none;}
+
+/* Общие настройки страницы */
+html, body, [class*="css"] {
+    font-family: 'Manrope', sans-serif !important;
+}
+.stApp {
+    background: linear-gradient(135deg, #F7F5FF 0%, #ECE6FF 100%);
+}
+.block-container {
+    max-width: 1200px !important;
+    padding: 24px 32px !important;
+}
+
+/* Кнопки */
+.stButton > button {
+    border-radius: 12px !important;
+    height: 48px !important;
+    font-weight: 700 !important;
+    font-family: 'Manrope', sans-serif !important;
+    border: none !important;
+    transition: all 0.2s ease;
+}
+.stButton > button[kind="primary"] {
+    background-color: #5B3FD0 !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(91, 63, 208, 0.2) !important;
+}
+.stButton > button[kind="primary"]:hover {
+    background-color: #7452D6 !important;
+    transform: translateY(-1px);
+}
+.stButton > button[kind="secondary"] {
+    background-color: white !important;
+    color: #5B3FD0 !important;
+    border: 1.5px solid #5B3FD0 !important;
+}
+
+/* Стили для file_uploader */
+[data-testid="stFileUploaderDropzone"] {
+    background-color: rgba(255, 255, 255, 0.6) !important;
+    border: 1.5px dashed #7452D6 !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
+}
