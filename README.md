@@ -6,5 +6,5 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone <ваша-ссылка-на-репозиторий>
+   git clone <https://github.com/Demiurg39/laughing-beeline-front.git>
    cd laughing-beeline-front
