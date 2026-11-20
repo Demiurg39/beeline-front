@@ -1,0 +1,6 @@
+[
+  {"name": "Базовый", "price": 250, "minutes": 300, "gb": 5, "sms": 50, "overage": "3 сом/мин"},
+  {"name": "Комфорт", "price": 450, "minutes": 600, "gb": 10, "sms": 100, "overage": "2 сом/мин"},
+  {"name": "Комфорт+", "price": 550, "minutes": 1000, "gb": 20, "sms": 200, "overage": "1.5 сом/мин"},
+  {"name": "Премиум", "price": 950, "minutes": 1500, "gb": 40, "sms": 300, "overage": "1 сом/мин"}
+]
