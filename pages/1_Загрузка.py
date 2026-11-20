@@ -2,7 +2,6 @@ import streamlit as st
 import time
 from components.styles import inject_css
 from components.header import render_header
-from services.mock_api import MockAPI
 
 st.set_page_config(page_title="Вход — Tariffly", layout="wide")
 inject_css()
@@ -33,10 +32,10 @@ with col_left:
                 st.write("📊 Загружаем детализацию за 3 месяца...")
                 time.sleep(1)
                 st.write("🧠 Нейросеть подбирает лучший вариант...")
-                result = MockAPI.fetch_user_data_by_phone(phone)
                 status.update(label="Анализ завершен!", state="complete", expanded=False)
 
-            st.session_state['result'] = result
+            # Сохраняем ТОЛЬКО номер телефона.
+            # Сами данные мы запросим на странице Результатов через backend_mock.
             st.session_state['phone'] = phone
             st.switch_page("pages/2_Результаты.py")
 
