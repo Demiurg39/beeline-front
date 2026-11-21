@@ -34,3 +34,20 @@ def get_tariff_plan_html(border, badge, name, price, minutes, gb, sms, overage):
         f'<div style="margin-top: 20px; color: #6E688F; font-size: 0.8rem; border-top: 1px solid #F0F0F0; padding-top: 16px;">Перерасход: {overage}</div>'
         f'</div>'
     )
+def get_addon_card_html(name, fee, minutes, gb, sms):
+    # Формируем список того, что дает пакет
+    perks = []
+    if minutes > 0: perks.append(f"{minutes} минут")
+    if gb > 0: perks.append(f"{gb} ГБ")
+    if sms > 0: perks.append(f"{sms} SMS")
+    perks_str = " • ".join(perks)
+
+    return (
+        f'<div class="tariff-card" style="background: #FFFFFF; border: 1px solid #E8E1FB; border-radius: 18px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); height: 100%; display: flex; flex-direction: column; justify-content: space-between;">'
+        f'<div>'
+        f'<h4 style="color: #252044; margin-top: 0; margin-bottom: 8px; font-size: 1.1rem; font-weight: 700;">{name}</h4>'
+        f'<div style="color: #6E688F; font-size: 0.85rem; margin-bottom: 16px;">{perks_str}</div>'
+        f'</div>'
+        f'<div style="font-size: 1.5rem; font-weight: 800; color: #5B3FD0;">{fee:.0f} сом <span style="font-size: 0.9rem; color: #6E688F;">/ мес.</span></div>'
+        f'</div>'
+    )

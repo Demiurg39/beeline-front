@@ -1,5 +1,5 @@
 import streamlit as st
-from templates.cards_html import get_recommended_tariff_html, get_tariff_plan_html
+from templates.cards_html import get_recommended_tariff_html, get_tariff_plan_html, get_addon_card_html
 from templates.banners_html import get_status_banner_html, get_optimal_banner_html
 from templates.results_html import get_metrics_html, get_savings_block_html, get_llm_block_html
 
@@ -13,10 +13,19 @@ class UICards:
         border = "2px solid #7452D6" if is_recommended else "1px solid #E8E1FB"
         badge = '<div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background-color: #7452D6; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">✓ Рекомендуем</div>' if is_recommended else ''
 
+        # Формируем строку перерасхода из объекта overage
+        overage_str = f"Звонок: {tariff.overage.call} сом, Интернет: {tariff.overage.data} сом, SMS: {tariff.overage.sms} сом"
+
         html = get_tariff_plan_html(
-            border, badge, tariff.name, tariff.price,
-            tariff.minutes, tariff.gb, tariff.sms, tariff.overage_cost
+            border, badge, tariff.name, tariff.fee,
+            tariff.minutes, tariff.gb, tariff.sms, overage_str
         )
+        st.markdown(html, unsafe_allow_html=True)
+
+    @staticmethod
+    def render_addon_card(addon):
+        """Отрисовка карточки дополнительного пакета."""
+        html = get_addon_card_html(addon.name, addon.fee, addon.minutes, addon.gb, addon.sms)
         st.markdown(html, unsafe_allow_html=True)
 
     # ==========================================
