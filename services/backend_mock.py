@@ -2,6 +2,37 @@ import time
 from typing import Optional, List, Dict
 
 
+# ==========================================
+# МАППИНГ НОМЕРОВ ТЕЛЕФОНОВ НА АБОНЕНТОВ
+# ==========================================
+# Имитация базы данных оператора: какой номер принадлежит какому абоненту из subscribers.json
+PHONE_TO_SUBSCRIBER_MAP = {
+    "+996555000001": "P01",
+    "+996555000002": "P02",
+    "+996555000003": "P03",
+    "+996555000004": "P04",
+    "+996555000005": "P05",
+    "+996555000006": "P06",
+    "+996555000007": "P07",
+    "+996555000008": "P08",
+    "+996555000009": "P09",
+    "+996555000010": "P10",
+}
+
+
+def get_subscriber_id_by_phone(phone: str) -> Optional[str]:
+    """
+    Возвращает ID абонента по номеру телефона.
+    Если номер не найден, возвращает None.
+    """
+    # Убираем пробелы, если пользователь их ввел
+    clean_phone = phone.replace(" ", "")
+    return PHONE_TO_SUBSCRIBER_MAP.get(clean_phone)
+
+
+# ==========================================
+# КЛАССЫ ДЛЯ МОК-ДАННЫХ
+# ==========================================
 class TariffComparisonItem:
     def __init__(self, tariff_name, avg_monthly_cost, net_savings_3m, is_profitable):
         self.tariff_name = tariff_name
@@ -42,7 +73,9 @@ class ApiRecommendationResponse:
         self.llm_explanation = llm_explanation
 
 
-# --- ФУНКЦИЯ-ЗАГЛУШКА ---
+# ==========================================
+# ФУНКЦИЯ-ЗАГЛУШКА (Генератор ответа)
+# ==========================================
 def get_mock_api_response(phone: str) -> ApiRecommendationResponse:
     time.sleep(1.5)
 
@@ -80,7 +113,7 @@ def get_mock_api_response(phone: str) -> ApiRecommendationResponse:
             monthly_savings=0.0,
             switch_fee=0.0,
             net_savings_3m=0.0,
-            monthly_costs={"2026-08": 400.0, "2026-09": 410.0, "2026-10": 390.0},  # <-- Вот эту строку мы пропустили!
+            monthly_costs={"2026-08": 400.0, "2026-09": 410.0, "2026-10": 390.0},
             consumption=[
                 ConsumptionDetail("Август", 100, 2.0, 5),
                 ConsumptionDetail("Сентябрь", 120, 2.5, 8),
