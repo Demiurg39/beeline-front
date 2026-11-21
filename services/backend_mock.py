@@ -89,8 +89,14 @@ def _parse_api_response(api_data: dict) -> ApiRecommendationResponse:
     consumption = []
     for item in rec_data.get("consumption_on_recommended_tariff", []):
         usage = item["billable_usage"]
+
+        # Временная заглушка: если бэкенд вернул нули, подставляем моковые данные
+        minutes = usage["call"] if usage["call"] > 0 else 150
+        gb = usage["data"] if usage["data"] > 0 else 5.0
+        sms = usage["sms"] if usage["sms"] > 0 else 10
+
         consumption.append(ConsumptionDetail(
-            item["month"], int(usage["call"]), usage["data"], int(usage["sms"])
+            item["month"], int(minutes), gb, int(sms)
         ))
 
     rec = RecommendationResult(
@@ -106,6 +112,10 @@ def _parse_api_response(api_data: dict) -> ApiRecommendationResponse:
             item["tariff_name"], item["avg_monthly_cost"], item["net_savings_3m"], item["is_profitable"]
         ) for item in api_data["comparison"]
     ]
+
+    print("=== ОТВЕТ ОТ API ===")
+    print(api_data)
+    print("====================")
 
     return ApiRecommendationResponse(rec, comp, api_data.get("llm_explanation"))
 
